@@ -17,6 +17,7 @@ const int RightBack = -14;
 //Pnuematic Ports
 const char PistonPort1 = 'A';
 const char PistonPort2 = 'B';
+const char HangPort = 'C';
 
 //Motor speeds
 const int IntakeSpeed = 600;

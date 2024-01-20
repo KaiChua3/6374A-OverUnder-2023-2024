@@ -247,7 +247,7 @@ void interfered_example() {
 //Goalside Auton
 void GoalsideAuton() {
   Intake intake(IntakePort);
-  Wings wings (PistonPort1, PistonPort2);
+  Wings wings (PistonPort1, PistonPort2, HangPort);
 
   wings.activateWings(false);
   intake.spinIntake(IntakeSpeed);
@@ -315,7 +315,7 @@ void OppositeSideAuton() {
 //Goalside WP auton
 void GoalsideWPAuton() {
   Intake intake(IntakePort);
-  Wings wings (PistonPort1, PistonPort2);
+  Wings wings (PistonPort1, PistonPort2, HangPort);
 
   wings.activateWings(false);
   //Push Alliance Preload into goal
@@ -367,7 +367,7 @@ void GoalsideWPAuton() {
 //Oppositeside WP auton
 void OppositesideWPAuton() {
   Intake intake(IntakePort);
-  Wings wings (PistonPort1, PistonPort2);
+  Wings wings (PistonPort1, PistonPort2, HangPort);
 
   //Initialize intake and wings
   wings.activateWings(true);

@@ -147,7 +147,7 @@ void autonomous() {
   chassis.reset_drive_sensor(); // Reset drive sensors to 0
   chassis.set_drive_brake(MOTOR_BRAKE_HOLD); // Set motors to hold.  This helps autonomous consistency.
 
-  Wings wings (PistonPort1, PistonPort2);
+  Wings wings (PistonPort1, PistonPort2, HangPort);
   Intake intake(IntakePort);
   wings.activateWings(false);
   //ez::as::auton_selector.call_selected_auton(); // Calls selected auton from autonomous selector.
@@ -176,7 +176,7 @@ void opcontrol() {
   //Class declarations
   Catapult cata(CataPort);
   Intake intake(IntakePort);
-  Wings wings(PistonPort1, PistonPort2);
+  Wings wings(PistonPort1, PistonPort2, HangPort);
   Systems systems(cata, intake, wings);
 
   wings.activateWings(false);

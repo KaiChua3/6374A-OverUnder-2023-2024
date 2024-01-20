@@ -7,6 +7,7 @@
 
 bool pistonActive = true;
 bool cataOn = true;
+bool hangActive = false;
 
 Systems::Systems (Catapult bot_cata, Intake bot_intake, Wings bot_wings) 
 : bot_cata(bot_cata)
@@ -42,6 +43,10 @@ void Systems::update_wings() {
     if (robot_controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
         pistonActive = !pistonActive;
         bot_wings.activateWings(pistonActive);
+    }
+    if (robot_controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+        hangActive = !hangActive;
+        bot_wings.activateHang(hangActive);
     }
 }
 
