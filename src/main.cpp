@@ -151,7 +151,7 @@ void autonomous() {
   Intake intake(IntakePort);
   wings.activateWings(false);
   //ez::as::auton_selector.call_selected_auton(); // Calls selected auton from autonomous selector.
-  GoalsideAuton();
+  OppositesideWPAuton();
 }
 
 
