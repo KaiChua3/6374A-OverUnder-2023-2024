@@ -4,6 +4,7 @@
 
 //Cata and Intake Ports
 const int CataPort = 16;
+const int SmallCataPort = 7;
 const int IntakePort = 9;
 
 //Drivetrain Ports

@@ -90,10 +90,11 @@ void initialize() {
     Auton("Swing Example\n\nSwing, drive, swing.", swing_example),
     Auton("Combine all 3 movements", combining_movements),
     Auton("Interference\n\nAfter driving forward, robot performs differently if interfered or not.", interfered_example),
-    Auton("Goalside Auton: Scores Preload", GoalsideAuton),
-    Auton("Opposite Side Auton: NOT TESTED", OppositeSideAuton),
-    Auton("Goalside WP", GoalsideWPAuton),
-    Auton("Oppositeside WP", OppositesideWPAuton),
+    Auton("Programming Skills", ProgrammingSkillsAuton),
+    Auton("Goalside Auton: Scores Preload, more to be added", GoalsideElimsAuton),
+    Auton("Opposite Side Auton: NOT TESTED", OppositeSideElimsAuton),
+    Auton("Goalside WP: TESTING", GoalsideWPAuton),
+    Auton("Oppositeside WP: WORKING", OppositesideWPAuton),
     Auton("Drive test", testingDriveAuton),
     Auton("Turn test", testingTurnAuton),
   });
@@ -150,8 +151,7 @@ void autonomous() {
   Wings wings (PistonPort1, PistonPort2, HangPort);
   Intake intake(IntakePort);
   wings.activateWings(false);
-  //ez::as::auton_selector.call_selected_auton(); // Calls selected auton from autonomous selector.
-  OppositesideWPAuton();
+  ez::as::auton_selector.call_selected_auton(); // Calls selected auton from autonomous selector.
 }
 
 
@@ -174,7 +174,7 @@ void opcontrol() {
   chassis.set_drive_brake(MOTOR_BRAKE_HOLD);
 
   //Class declarations
-  Catapult cata(CataPort);
+  Catapult cata(CataPort, SmallCataPort);
   Intake intake(IntakePort);
   Wings wings(PistonPort1, PistonPort2, HangPort);
   Systems systems(cata, intake, wings);

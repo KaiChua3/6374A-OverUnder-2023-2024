@@ -12,8 +12,9 @@ void swing_example();
 void combining_movements();
 void interfered_example();
 
-void GoalsideAuton();
-void OppositeSideAuton();
+void ProgrammingSkillsAuton();
+void GoalsideElimsAuton();
+void OppositeSideElimsAuton();
 void GoalsideWPAuton();
 void OppositesideWPAuton();
 void disruptAuton();
