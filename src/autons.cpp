@@ -1,6 +1,7 @@
 #include "main.h"
 #include "Intake.hpp"
 #include "Wings.hpp"
+#include "Catapult.hpp"
 #include "Constants.hpp"
 
 /////
@@ -29,9 +30,9 @@ void default_constants() {
   chassis.set_slew_min_power(135, 60);
   chassis.set_slew_distance(7, 7);
   chassis.set_pid_constants(&chassis.headingPID, 11, 0, 40, 0);
-  chassis.set_pid_constants(&chassis.forward_drivePID, 5, 0, 0, 0);
-  chassis.set_pid_constants(&chassis.backward_drivePID, 0.45, 0, 5, 0);
-  chassis.set_pid_constants(&chassis.turnPID, 5, 0, 0, 0);
+  chassis.set_pid_constants(&chassis.forward_drivePID, 6.5, 0, 4, 0);
+  chassis.set_pid_constants(&chassis.backward_drivePID, 3, 0, 5, 0);
+  chassis.set_pid_constants(&chassis.turnPID, 5, 0, 8, 0);
   chassis.set_pid_constants(&chassis.swingPID, 7, 0, 45, 0);
 }
 void one_mogo_constants() {
@@ -246,7 +247,61 @@ void interfered_example() {
 
 // Programming Skills Auton
 void ProgrammingSkillsAuton() {
-  
+  Intake intake(IntakePort);
+  Wings wings (PistonPort1, PistonPort2, HangPort);
+  Catapult cata (CataPort, SmallCataPort);
+
+  // Run cata for 15 seconds
+  cata.launch(CataSpeed);
+
+  // Turn left with respect to front such that front faces red goal
+
+
+  // Move forward 2 tiles
+
+
+  // Turn right 90 degrees
+
+
+  // Move forward 1 tile
+
+
+  // Turn left 90 degrees
+
+
+  // Move forward 3 tiles
+
+
+  // Turn left 45 degrees
+
+
+  // Activate wings and move forward
+
+
+  // Turn right 45 degrees
+
+
+  // Move forward and push triballs into goal
+
+
+  // Move backwards 1 tile
+
+
+  // Turn left 90 degrees
+
+
+  // Move forward 2 tiles
+
+
+  // Turn right 135 degrees
+
+
+  // Move forward to further push triballs into goal
+
+
+  // Move backwards to not touch goal
+
+
 }
 
 // Goalside Elims Auton
@@ -254,95 +309,12 @@ void GoalsideElimsAuton() {
   Intake intake(IntakePort);
   Wings wings (PistonPort1, PistonPort2, HangPort);
 
-  wings.activateWings(false);
-  //Push Alliance Preload into goal
-  chassis.set_drive_pid(-72, -127, true, false);
-  chassis.wait_drive();
-
-  // Move away from goal
-  chassis.set_drive_pid(24, 110, true, false);
-  chassis.wait_drive();
-
-  // Turn right 90 degrees
-  chassis.set_turn_pid(90, 110);
-  chassis.wait_drive();
-
-  // Move forward 1 tile to be able to face field triballs
-  chassis.set_drive_pid(24, 110, true, false);
-  chassis.wait_drive();
-
-  // Turn 90 degrees to face field triballs
-  chassis.set_turn_pid(90, 110);
-  // Spin intake to take in triballs
-  intake.spinIntake(-1 * IntakeSpeed);
-  chassis.wait_drive();
-
-  // Move forward to intake first triball
-  chassis.set_drive_pid(58, 110, true, false);
-  chassis.wait_drive();
-  /*
-  // Move backwards a bit off the barrier so PID not thrown off
-  chassis.set_drive_pid(-10, -110, true, false);
-  chassis.wait_drive();
-
-  // Turn 90 degrees to the right to face remaining triballs
-  chassis.set_turn_pid(-90, 110);
+  // Turn left and push corner triball out of goal
   wings.activateWings(true);
-  chassis.wait_drive();
-
-  chassis.set_drive_pid(18, 110, true, false);
-  chassis.wait_drive();
-
-  chassis.set_turn_pid(45, 110);
-  chassis.wait_drive();
-
-  chassis.set_drive_pid(28, 110, true, false);
-  chassis.wait_drive();
-*/
-}
-
-// Opposite Side Elims Auton
-void OppositeSideElimsAuton() {
-  Intake intake(IntakePort);
-
-  chassis.set_turn_pid(90, 110);
-  chassis.wait_drive();
-
-  intake.spinIntake(IntakeSpeed);
-
-  chassis.set_drive_pid(36, 110, true, false);
-  chassis.wait_drive();
-
-  intake.spinIntake(0);
-
-  chassis.set_drive_pid(36, -110, true, false);
-  chassis.wait_drive();
-
-  chassis.set_turn_pid(-90, 110);
-  chassis.wait_drive();
-
-  chassis.set_drive_pid(60, 110, true, false);
-  chassis.wait_drive();
-
-  chassis.set_turn_pid(90, 110);
+  chassis.set_turn_pid(-45, 110);
   chassis.wait_drive();
   
-  intake.spinIntake(IntakeSpeed);
-
-  chassis.set_drive_pid(36, 110, true, false);
-  chassis.wait_drive();
-
-  intake.spinIntake(0);
-}
-
-// Goalside WP auton
-void GoalsideWPAuton() {
-  Intake intake(IntakePort);
-  Wings wings (PistonPort1, PistonPort2, HangPort);
-
-  wings.activateWings(false);
   //Push Alliance Preload into goal
-  wings.activateWings(true);
   chassis.set_drive_pid(72, 127, true, false);
   chassis.wait_drive();
 
@@ -404,6 +376,91 @@ void GoalsideWPAuton() {
   wings.activateWings(false);
 }
 
+// Opposite Side Elims Auton
+void OppositeSideElimsAuton() {
+  Intake intake(IntakePort);
+
+  chassis.set_turn_pid(90, 110);
+  chassis.wait_drive();
+
+  intake.spinIntake(IntakeSpeed);
+
+  chassis.set_drive_pid(36, 110, true, false);
+  chassis.wait_drive();
+
+  intake.spinIntake(0);
+
+  chassis.set_drive_pid(36, -110, true, false);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(-90, 110);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(60, 110, true, false);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(90, 110);
+  chassis.wait_drive();
+  
+  intake.spinIntake(IntakeSpeed);
+
+  chassis.set_drive_pid(36, 110, true, false);
+  chassis.wait_drive();
+
+  intake.spinIntake(0);
+}
+
+// Goalside WP auton
+void GoalsideWPAuton() {
+  Intake intake(IntakePort);
+  Wings wings (PistonPort1, PistonPort2, HangPort);
+
+  // Move forward
+  wings.activateWings(true);
+  intake.spinIntake(IntakeSpeed);
+  chassis.set_drive_pid(6, 110, true, false);
+  chassis.wait_drive();
+
+  // Turn left and push corner triball out of goal
+  chassis.set_turn_pid(-45, 110);
+  chassis.wait_drive();
+
+  // Push Alliance Preload into goal
+  wings.activateWings(true);
+  chassis.set_drive_pid(72, 127, true, false);
+  chassis.wait_drive();
+
+  // Move away from goal
+  wings.activateWings(false);
+  intake.spinIntake(0);
+  chassis.set_drive_pid(-24, 110, true, false);
+  chassis.wait_drive();
+
+  // Turn right with respect to back, have back face pole
+  chassis.set_turn_pid(90, 110);
+  chassis.wait_drive();
+
+  // Move backwards towards pole
+  chassis.set_drive_pid(-24, -110, true, false);
+  chassis.wait_drive();
+
+  // Turn left with respect to back, facing alley
+  chassis.set_turn_pid(-90, 110);
+  chassis.wait_drive();
+
+  // Move backwards half a tile
+  chassis.set_drive_pid(-12, -110);
+  chassis.wait_drive();
+
+  // Turn right with respect to back, facing pole
+  chassis.set_turn_pid(90, 110);
+  chassis.wait_drive();
+
+  // Move backwards to touch pole
+  chassis.set_drive_pid(-42.5, 110, true, false);
+  chassis.wait_drive();
+}
+
 // Oppositeside WP auton
 void OppositesideWPAuton() {
   Intake intake(IntakePort);
@@ -420,6 +477,26 @@ void OppositesideWPAuton() {
   chassis.set_turn_pid(-45, 110);
   chassis.wait_drive();
 
+  chassis.set_drive_pid(-16, 110, true, false);
+  chassis.wait_drive();
+
+  wings.activateWings(false);
+  chassis.set_drive_pid(16, 110, true, false);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(45, 110);
+  chassis.wait_drive();
+
+  wings.activateWings(true);
+  chassis.set_drive_pid(28, 110, true, false);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(-32, 110, true, false);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(-90, 110);
+  chassis.wait_drive();
+
   //Moves forward away from corner
   chassis.set_drive_pid(-16, 110);
   chassis.wait_drive();
@@ -430,7 +507,7 @@ void OppositesideWPAuton() {
   chassis.wait_drive();
 
   //Moves forward into alley
-  chassis.set_drive_pid(-14, 110, true, false);
+  chassis.set_drive_pid(-20, 110, true, false);
   chassis.wait_drive();
 
   //Turns back facing the pole
@@ -438,7 +515,7 @@ void OppositesideWPAuton() {
   chassis.wait_drive();
 
   //Moves forward to touch pole
-  chassis.set_drive_pid(-42.5, 110, true, false);
+  chassis.set_drive_pid(-30, 110, true, false);
   chassis.wait_drive();
 }
 
@@ -449,7 +526,7 @@ void disruptAuton() {
 
 //Testing drive to tune PID
 void testingDriveAuton() {
-  chassis.set_drive_pid(24, 110, true, false);
+  chassis.set_drive_pid(-24, -110, true, false);
   chassis.wait_drive();
 }
 

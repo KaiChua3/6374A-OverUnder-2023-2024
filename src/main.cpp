@@ -151,7 +151,7 @@ void autonomous() {
   Wings wings (PistonPort1, PistonPort2, HangPort);
   Intake intake(IntakePort);
   wings.activateWings(false);
-  ez::as::auton_selector.call_selected_auton(); // Calls selected auton from autonomous selector.
+  OppositesideWPAuton(); // Calls selected auton from autonomous selector.
 }
 
 
@@ -174,7 +174,7 @@ void opcontrol() {
   chassis.set_drive_brake(MOTOR_BRAKE_HOLD);
 
   //Class declarations
-  Catapult cata(CataPort, SmallCataPort);
+  Catapult cata(CataPort, SmallCataPort); 
   Intake intake(IntakePort);
   Wings wings(PistonPort1, PistonPort2, HangPort);
   Systems systems(cata, intake, wings);
