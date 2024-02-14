@@ -142,16 +142,31 @@ void competition_initialize() {
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+
+/**
+* Autonomous Information
+* OppositesideWP: Pushes corner triball out, pushes pole triball and maybe alliance preload into offensive zone. Touches pole for WP
+* GoalsideWP: Pushes alliance preload into goal, pushes corner triball out of match load zone, intakes pole triball. Touches pole for WP
+* GoalsideElims: 6 triball auton, 
+* OppositeSideElims: 
+* ProgrammingSkillsAuton: 
+
+*/
 void autonomous() {
   chassis.reset_pid_targets(); // Resets PID targets to 0
   chassis.reset_gyro(); // Reset gyro position to 0
   chassis.reset_drive_sensor(); // Reset drive sensors to 0
   chassis.set_drive_brake(MOTOR_BRAKE_HOLD); // Set motors to hold.  This helps autonomous consistency.
 
-  Wings wings (PistonPort1, PistonPort2, HangPort);
+  Wings wings (PistonPort1, PistonPort2, HangPort, BackPistonPort1, BackPistonPort2);
   Intake intake(IntakePort);
   wings.activateWings(false);
-  OppositesideWPAuton(); // Calls selected auton from autonomous selector.
+  ez::as::auton_selector.call_selected_auton();
+  // OppositesideWPAuton();
+  // GoalsideWPAuton();
+  // GoalsideElimsAuton();
+  // OppositeSideElimsAuton();
+  // ProgrammingSkillsAuton();
 }
 
 
@@ -176,7 +191,7 @@ void opcontrol() {
   //Class declarations
   Catapult cata(CataPort, SmallCataPort); 
   Intake intake(IntakePort);
-  Wings wings(PistonPort1, PistonPort2, HangPort);
+  Wings wings(PistonPort1, PistonPort2, HangPort, BackPistonPort1, BackPistonPort2);
   Systems systems(cata, intake, wings);
 
   wings.activateWings(false);
