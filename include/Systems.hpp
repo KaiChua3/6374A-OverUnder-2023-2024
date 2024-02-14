@@ -12,9 +12,6 @@ class Systems {
         Catapult bot_cata;
         Intake bot_intake;
         Wings bot_wings;
-        
-        bool pistonsActive = false;
-        bool cataOn = false;
 
         void update_catapult();
         void update_intake();
