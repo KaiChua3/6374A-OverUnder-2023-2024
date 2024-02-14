@@ -6,7 +6,6 @@
 #include "Constants.hpp"
 
 bool pistonActive = true;
-bool backWingsActive = true;
 bool cataOn = true;
 bool hangActive = false;
 
@@ -48,10 +47,6 @@ void Systems::update_wings() {
     if (robot_controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
         hangActive = !hangActive;
         bot_wings.activateHang(hangActive);
-    }
-    if (robot_controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-        backWingsActive = !backWingsActive;
-        bot_wings.activateBackWings(backWingsActive);
     }
 }
 

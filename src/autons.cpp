@@ -248,15 +248,14 @@ void interfered_example() {
 // Programming Skills Auton
 void ProgrammingSkillsAuton() {
   Intake intake(IntakePort);
-  Wings wings (PistonPort1, PistonPort2, HangPort, BackPistonPort1, BackPistonPort2);
+  Wings wings (PistonPort1, PistonPort2, HangPort);
   Catapult cata (CataPort, SmallCataPort);
 
-  // Run cata for 20 seconds
+  // Run cata for 15 seconds
   cata.launch(CataSpeed);
-  pros::Task::delay(20000);
 
   // Turn left with respect to front such that front faces red goal
-  
+
 
   // Move forward 2 tiles
 
@@ -308,49 +307,29 @@ void ProgrammingSkillsAuton() {
 // Goalside Elims Auton
 void GoalsideElimsAuton() {
   Intake intake(IntakePort);
-  Wings wings (PistonPort1, PistonPort2, HangPort, BackPistonPort1, BackPistonPort2);
+  Wings wings (PistonPort1, PistonPort2, HangPort);
 
-  // Activate wings and push triball out of match load zone
-  wings.activateWings(true);
-  intake.spinIntake(IntakeSpeed);
-  chassis.set_drive_pid(-6, 110, true, false);
-  chassis.wait_drive();
-
-  // Turn left and push corner triball out of match load zone
+  // Turn left and push corner triball out of goal
   wings.activateWings(true);
   chassis.set_turn_pid(-45, 110);
   chassis.wait_drive();
   
-  // Push Alliance Preload into goal
-  chassis.set_drive_pid(-12, 127, true, false);
+  //Push Alliance Preload into goal
+  chassis.set_drive_pid(72, 127, true, false);
   chassis.wait_drive();
 
   // Move away from goal
-  chassis.set_drive_pid(12, 110, true, false);
+  chassis.set_drive_pid(-24, 110, true, false);
   chassis.wait_drive();
 
-  // Turn right 90 degrees
+  // Turn left 90 degrees
   wings.activateWings(false);
-  chassis.set_turn_pid(90, 110);
+  chassis.set_turn_pid(-90, 110);
   chassis.wait_drive();
 
   // Move forward 1 tile to be able to face field triballs
   chassis.set_drive_pid(24, 110, true, false);
   chassis.wait_drive();
-
-  // Turn left 90 degrees
-  chassis.set_turn_pid(-90, 110);
-  chassis.wait_drive();
-
-  // Move forward half a tile
-  chassis.set_drive_pid(12, 110, true, false);
-  chassis.wait_drive();
-
-  // Turn right 90 degrees
-  chassis.set_turn_pid(90, 110);
-  chassis.wait_drive();
-
-  // 
 
   // Turn right 90 degrees to face field triballs
   chassis.set_turn_pid(90, 110);
@@ -434,14 +413,14 @@ void OppositeSideElimsAuton() {
 // Goalside WP auton
 void GoalsideWPAuton() {
   Intake intake(IntakePort);
-  Wings wings (PistonPort1, PistonPort2, HangPort, BackPistonPort1, BackPistonPort2);
+  Wings wings (PistonPort1, PistonPort2, HangPort);
 
   // Move forward
   wings.activateWings(true);
   intake.spinIntake(IntakeSpeed);
   chassis.set_drive_pid(6, 110, true, false);
   chassis.wait_drive();
-  
+
   // Turn left and push corner triball out of goal
   chassis.set_turn_pid(-45, 110);
   chassis.wait_drive();
@@ -480,33 +459,12 @@ void GoalsideWPAuton() {
   // Move backwards to touch pole
   chassis.set_drive_pid(-42.5, 110, true, false);
   chassis.wait_drive();
-
-  // Turns 180 to face pole triball
-  chassis.set_turn_pid(180, 110);
-  chassis.wait_drive();
-
-  // Intakes triball
-  intake.spinIntake(IntakeSpeed);
-  chassis.set_drive_pid(3, 110, true, false);
-  chassis.wait_drive();
-
-  // Moves backwards
-  chassis.set_drive_pid(-3, -110, true, false);
-  chassis.wait_drive();
-
-  // Turns around
-  chassis.set_turn_pid(180, 110);
-  chassis.wait_drive();
-
-  // Touches pole
-  chassis.set_drive_pid(2, 110, true, false);
-  chassis.wait_drive();
 }
 
 // Oppositeside WP auton
 void OppositesideWPAuton() {
   Intake intake(IntakePort);
-  Wings wings (PistonPort1, PistonPort2, HangPort, BackPistonPort1, BackPistonPort2);
+  Wings wings (PistonPort1, PistonPort2, HangPort);
 
   //Initialize intake and wings
   wings.activateWings(true);
@@ -526,7 +484,7 @@ void OppositesideWPAuton() {
   chassis.set_drive_pid(16, 110, true, false);
   chassis.wait_drive();
 
-  chassis.set_turn_pid(90, 110);
+  chassis.set_turn_pid(45, 110);
   chassis.wait_drive();
 
   wings.activateWings(true);
